@@ -1,0 +1,31 @@
+---
+import TextReveal from '@/components/TextReveal.astro'
+---
+
+<section
+  data-about
+  class="bg-dark-blue text-steel-blue py-40 lg:py-52 xl:py-60 px-8"
+>
+  <TextReveal
+    class="text-xl lg:text-2xl 2xl:text-3xl font-serif font-semibold max-w-[30ch] leading-snug lg:leading-snug 2xl:leading-snug mx-auto" 
+    color="bg-gradient-to-r from-white to-white text-white/50"
+  >
+    Bonjour, je suis un jeune développeur passionné par l'informatique et les nouvelles 
+    technologies, titulaire d'un diplôme spécialisé dans le développement d'applications.
+    Fort d'une expérience concrète dans des projets professionnels web et mobiles,
+    je m'applique à créer des solutions propres et performantes. Parcourez mon travail pour 
+    découvrir comment je donne vie à mes idées.
+  </TextReveal>
+</section>
+
+<script>
+  import { DOMLoaded } from '../ts/events'
+  import { fadeOut } from '../ts/animations'
+
+  DOMLoaded(() => {
+    const trigger = document.querySelector('[data-about]') as HTMLElement
+    const target = trigger.querySelector('p') as HTMLElement
+
+    fadeOut(trigger, target)
+  })
+</script>
