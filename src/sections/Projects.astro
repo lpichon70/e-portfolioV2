@@ -1,0 +1,86 @@
+---
+import Card from '@/components/Card.astro'
+import projectOne from '@/images/project-1.png'
+import projectTwo from '@/images/project-2.png'
+import projectThree from '@/images/project-3.png'
+import projectFour from '@/images/project-4.png'
+---
+
+<section
+  data-projects
+  class="flex flex-col gap-10 lg:gap-12 py-16 lg:py-20 2xl:py-24 px-8 overflow-clip"
+>
+  <h2
+    class="w-full max-w-2xl mx-auto text-dark-blue text-3xl lg:text-4xl 2xl:text-5xl text-center font-semibold"
+  >
+    Projets
+  </h2>
+
+  <div data-projects-wrapper class="w-full max-w-2xl mx-auto">
+    <ul data-projects-list class="flex gap-8 lg:gap-16 w-max">
+      <li>
+        <Card
+          image={projectOne}
+          title="Muscle API"
+          description="Une API de décomposition musculaire qui a pour but de faciliter la compréhension du corps humain. Cet outil a été créer à des fins d'évolution d'une application informatique."
+          link="https://github.com/lpichon70/Get-Your-Training-API"
+        />
+      </li>
+      <li>
+        <Card
+          image={projectTwo}
+          title="Application Web de gestion"
+          description="Application web de gestion des données de la boite dans laquelle j'ai réalisé mon alternance. Cette application possède une partie réservée aux utilisateurs et une partie admin (gestion de données)."
+          link="https://gestion.lecentreludique.com/public/"
+        />
+      </li>
+      <li>
+        <Card
+          image={projectThree}
+          title="Application mobile"
+          description="Application mobile Flutter de communication et d'échanges entre voisins de la boite de mon alternance."
+          link="#"
+        />
+      </li>
+      <!--
+      <li>
+        <Card
+          image={projectFour}
+          title="Interactive Data Visualization"
+          description="A tool that turns complex datasets into intuitive charts and graphs, demonstrating my skill in data-driven visualization and user engagement."
+          link="#"
+        />
+      </li>
+      -->
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { DOMLoaded } from '@/ts/events'
+
+  DOMLoaded(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    const projects = document.querySelector('[data-projects]') as HTMLElement
+    const projectsWrapper = projects.querySelector(
+      '[data-projects-wrapper]'
+    ) as HTMLElement
+    const projectsList = projects.querySelector(
+      '[data-projects-list]'
+    ) as HTMLElement
+    const width = projectsList.clientWidth - projectsWrapper.clientWidth
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: projects,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+        pin: true,
+      },
+    })
+
+    tl.fromTo(projectsList, { x: 0 }, { x: -width, duration: 1 })
+  })
+</script>
