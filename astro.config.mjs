@@ -5,5 +5,6 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://e-portfolio.lucas-pichon.fr',
+  site: 'https://lpichon70.github.io',
+  base: '/e-portfolioV2',
 });
