@@ -8,7 +8,7 @@ import projectFour from '@/images/project-4.png'
 
 <section
   data-projects
-  class="flex flex-col gap-10 lg:gap-12 py-16 lg:py-20 2xl:py-24 px-8 overflow-clip"
+  class="flex flex-col gap-10 lg:gap-12 py-16 lg:py-20 2xl:py-24 px-8 lg:overflow-clip overflow-visible"
 >
   <h2
     class="w-full max-w-2xl mx-auto text-dark-blue text-3xl lg:text-4xl 2xl:text-5xl text-center font-semibold"
@@ -17,8 +17,8 @@ import projectFour from '@/images/project-4.png'
   </h2>
 
   <div data-projects-wrapper class="w-full max-w-2xl mx-auto">
-    <ul data-projects-list class="flex gap-8 lg:gap-16 w-max">
-      <li>
+    <ul data-projects-list class="flex gap-8 w-max lg:gap-16 lg:overflow-visible lg:max-w-none overflow-x-auto max-w-full scroll-smooth snap-x snap-mandatory">
+      <li class="snap-center shrink-0 w-[85vw] sm:w-[60vw] lg:w-auto">
         <Card
           image={projectOne}
           title="Muscle API"
@@ -26,7 +26,7 @@ import projectFour from '@/images/project-4.png'
           link="https://github.com/lpichon70/Get-Your-Training-API"
         />
       </li>
-      <li>
+      <li class="snap-center shrink-0 w-[85vw] sm:w-[60vw] lg:w-auto">
         <Card
           image={projectTwo}
           title="Application Web de gestion"
@@ -34,7 +34,7 @@ import projectFour from '@/images/project-4.png'
           link="https://gestion.lecentreludique.com/public/"
         />
       </li>
-      <li>
+      <li class="snap-center shrink-0 w-[85vw] sm:w-[60vw] lg:w-auto">
         <Card
           image={projectThree}
           title="Jeu Snake"
@@ -43,7 +43,7 @@ import projectFour from '@/images/project-4.png'
         />
       </li>
       <!--
-      <li>
+      <li class="snap-center shrink-0">
         <Card
           image={projectFour}
           title="Interactive Data Visualization"
@@ -62,15 +62,18 @@ import projectFour from '@/images/project-4.png'
   import { DOMLoaded } from '@/ts/events'
 
   DOMLoaded(() => {
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches
+
+    if (!isDesktop) return // Ne rien faire sur mobile
+
     gsap.registerPlugin(ScrollTrigger)
+
     const projects = document.querySelector('[data-projects]') as HTMLElement
-    const projectsWrapper = projects.querySelector(
-      '[data-projects-wrapper]'
-    ) as HTMLElement
-    const projectsList = projects.querySelector(
-      '[data-projects-list]'
-    ) as HTMLElement
+    const projectsWrapper = projects.querySelector('[data-projects-wrapper]') as HTMLElement
+    const projectsList = projects.querySelector('[data-projects-list]') as HTMLElement
+
     const width = projectsList.clientWidth - projectsWrapper.clientWidth
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: projects,
